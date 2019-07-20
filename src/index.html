@@ -1,0 +1,184 @@
+<style>
+  h1{
+    text-align: center;
+    color: #fff;
+  }
+  #box{ 
+    width: 350px;
+    overflow: auto;
+    margin: 30px auto; 
+    padding-bottom: 40px;
+    border-color: #333; 
+    background-color: gray;
+  }
+  #gameBoard textarea{
+    float: left;
+    margin: 10px;
+    height: 70px;
+    width: 70px;
+    font-size: 50px;
+    background: #333;
+    color: #ccc;
+    list-style: none;
+    text-align: center;
+    border-radius: 5px;
+  }
+  #myButton1{
+    height: 50px;
+    width: 100px;
+    font-size: 40px;
+    color: #333;
+    background: rgb(253, 177, 177);
+    list-style: none;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 5px;
+  }
+  #fieldToFill{
+    font-size: 40px;
+    align-items: center;
+    width: 100px;
+    text-align: center
+  }
+  #player{
+    color: rgb(77, 58, 11);
+    border: none;
+    background-color: gray;
+  }
+  #main{
+    color: rgb(77, 58, 11); 
+    border: none
+  }
+  footer{
+    margin: 5rem;
+    padding-top: 20px;
+  }
+</style>
+<html>
+  <body>
+    <div class="text-center"id="box">
+      <header>
+        <h1>Play Tic Tac Toe
+          <br><a href="http://localhost:12345/menu" id="main">Main</a>
+        </h1>  
+      </header>
+        <ul id="gameBoard">
+          <textarea disabled class="tic"id="1">1</textarea>
+          <textarea disabled class="tic"id="2">2</textarea>
+          <textarea disabled class="tic"id="3">3</textarea>
+          <textarea disabled class="tic"id="4">4</textarea>
+          <textarea disabled class="tic"id="5">5</textarea>
+          <textarea disabled class="tic"id="6">6</textarea>
+          <textarea disabled class="tic"id="7">7</textarea>
+          <textarea disabled class="tic"id="8">8</textarea>
+          <textarea disabled class="tic"id="9">9</textarea>
+        </ul>
+      <div class="clearfix"></div>
+      <footer> 
+        <textarea disabled   id="player">Player 1</textarea><input id="fieldToFill" type="text">
+        <input onclick="turn();" type="button" value="X" id="myButton1"/> 
+      </footer>
+    </div> 
+    <script>
+      var Game = [[]];
+      function turn() {
+        for (let counter = 0; counter < Game.length; counter++) {
+          if (Game[counter][0] === document.getElementById("fieldToFill").value || document.getElementById("fieldToFill").value == "") {
+            alert("Please select another field");
+            document.getElementById("fieldToFill").value = ""
+            return
+          }
+        } 
+        Game.push([document.getElementById("fieldToFill").value ,document.getElementById("myButton1").value])
+        let fieldValue = document.getElementById("fieldToFill").value;  
+        assignValue(document.getElementById("myButton1").value);
+        checkWinner();
+      }
+  
+      function assignValue(value = string) {
+        if (value == "X") {
+          document.getElementById(document.getElementById("fieldToFill").value).value="X";
+          document.getElementById("myButton1").value ="O" 
+          document.getElementById("fieldToFill").value = ""
+          document.getElementById("player").value = "Player 2 Turn"
+          return;
+        }
+        document.getElementById(document.getElementById("fieldToFill").value).value="O";
+        document.getElementById("myButton1").value ="X" 
+        document.getElementById("fieldToFill").value = "" 
+        document.getElementById("player").value = "Player 1 Turn" 
+        return;
+      }
+  
+      function checkWinner() {
+        if(document.getElementById("1").value == "X" && document.getElementById("2").value == "X" && document.getElementById("3").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("1").value == "O" && document.getElementById("2").value == "O" && document.getElementById("3").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if (document.getElementById("4").value == "X" && document.getElementById("5").value == "X" && document.getElementById("6").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("4").value == "O" && document.getElementById("5").value == "O" && document.getElementById("6").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if (document.getElementById("7").value == "X" && document.getElementById("8").value == "X" && document.getElementById("9").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("7").value == "O" && document.getElementById("8").value == "O" && document.getElementById("9").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if(document.getElementById("1").value == "X" && document.getElementById("4").value == "X" && document.getElementById("7").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("1").value == "O" && document.getElementById("4").value == "O" && document.getElementById("7").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if (document.getElementById("2").value == "X" && document.getElementById("5").value == "X" && document.getElementById("8").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("2").value == "O" && document.getElementById("5").value == "O" && document.getElementById("8").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if (document.getElementById("3").value == "X" && document.getElementById("6").value == "X" && document.getElementById("9").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("3").value == "O" && document.getElementById("6").value == "O" && document.getElementById("9").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if(document.getElementById("1").value == "X" && document.getElementById("5").value == "X" && document.getElementById("9").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("1").value == "O" && document.getElementById("5").value == "O" && document.getElementById("9").value == "O") {
+          alert("player 2 winner");
+          window.open("http://localhost:12345/player2", "_top");
+        }else if (document.getElementById("3").value == "X" && document.getElementById("5").value == "X" && document.getElementById("7").value == "X") {
+          alert("player 1 winner");
+          window.open("http://localhost:12345/player1", "_top");
+        }else if (document.getElementById("3").value == "O" && document.getElementById("5").value == "O" && document.getElementById("7").value == "O") {
+          alert("player 2 winner");
+        }else if (document.getElementById("1").value != "1" &&
+            document.getElementById("2").value != "2" &&
+            document.getElementById("3").value != "3" &&
+            document.getElementById("4").value != "4" &&
+            document.getElementById("5").value != "5" &&
+            document.getElementById("6").value != "6" &&
+            document.getElementById("7").value != "7" &&
+            document.getElementById("8").value != "8" &&
+            document.getElementById("9").value != "9"){
+          alert("Draw")
+        }
+      }
+    </script>
+    
+  </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/6.3.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+</html>
